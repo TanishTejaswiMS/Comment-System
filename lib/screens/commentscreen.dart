@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:commentsystem/screens/commentservice.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -12,21 +13,11 @@ class CommentScreen extends StatefulWidget {
 class _CommentScreenState extends State<CommentScreen> {
   final String username = "user 1";
   final String contenttype = "Video";
-  final String contentid = "abc1234";
+  final String contentid = "abc123";
   final ScrollController scrollController = ScrollController();
   String comment = "";
   // String time = DateFormat("hh:mm a").format(DateTime.now().toLocal());
 
-  void addcomment(time) {
-    print("in");
-    FirebaseFirestore.instance.collection("Comments").add({
-      "Username": username,
-      "Time": time,
-      "Comment": comment,
-      "Type": contenttype,
-      "ContentID": contentid
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +94,8 @@ String actualTime = formatterTime.format(now);
                 suffixIcon:
                     GestureDetector(onTap: () {
                       print("$comment");
-                addcomment(actualTime);
+                addcomment(actualTime, username, contentid, contenttype, comment
+                );
                 print("done");
                     }, child: Icon(Icons.send)),
                 border: OutlineInputBorder(
